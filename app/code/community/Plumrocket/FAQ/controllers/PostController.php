@@ -15,7 +15,6 @@
  * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
  */
 
-
-class Plumrocket_FAQ_Helper_Data extends Mage_Admin_Helper_Data
+class Plumrocket_FAQ_PostController extends Mage_Core_Controller_Front_Action
 {
 }

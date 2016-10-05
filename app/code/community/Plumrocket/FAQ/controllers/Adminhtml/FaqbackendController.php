@@ -5,7 +5,7 @@ class Plumrocket_FAQ_Adminhtml_FaqbackendController extends Mage_Adminhtml_Contr
 	public function indexAction()
   {
     $this->loadLayout();
-    $this->_title($this->__("Plumrocket FAQ"));
+    $this->_title($this->__("Plumrocket Manage FAQ"));
     $this->renderLayout();
   }
 }
