@@ -1,16 +1,82 @@
 <?xml version="1.0" ?>
 <config>
-    <menu>
-        <faq module="faq">
-            <title>Plumrocket</title>
-            <sort_order>9999</sort_order>
-            <children>
-                <faq_menu translate="title" module="faq">
-                    <title>FAQ</title>
-                    <sort_order>9999</sort_order>
-                    <action>AffiliatePublisher/index/index</action>
-                </faq_menu>
-            </children>
-        </faq>
-    </menu>
-</config>
+    <!--<menu>-->
+        <!--<faq>-->
+            <!--<title>Plumrocket1</title>-->
+            <!--<sort_order>9999</sort_order>-->
+            <!--<children>-->
+                <!--<faq_menu>-->
+                    <!--<title>FAQ</title>-->
+                    <!--<sort_order>9999</sort_order>-->
+                    <!--<action>AffiliatePublisher/index/index</action>-->
+                <!--</faq_menu>-->
+            <!--</children>-->
+        <!--</faq>-->
+    <!--</menu>-->
+        <menu>
+            <plumrocket>
+                <title>Plumrocket</title>
+                <sort_order>9999</sort_order>
+                <children>
+                    <faq>
+                        <title>FAQ</title>
+                        <sort_order>0</sort_order>
+                        <action>admin_faq/adminhtml_faqbackend</action>
+                    </faq>
+                </children>
+            </plumrocket>
+            <!--<system>-->
+                <!--<children>-->
+                    <!--<tools>-->
+                        <!--<children>-->
+                            <!--<faq_menu translate="title" module="faq">-->
+                                <!--<title>FAQ</title>-->
+                                <!--<sort_order>0</sort_order>-->
+                                <!--<action>admin_faq/adminhtml_faqbackend</action>-->
+                            <!--</faq_menu>-->
+                        <!--</children>-->
+                    <!--</tools>-->
+                <!--</children>-->
+            <!--</system>-->
+        </menu>
+        <!--<acl>-->
+            <!--<resources>-->
+                <!--<all>-->
+                    <!--<title>Allow Everything</title>-->
+                <!--</all>-->
+                <!--<admin>-->
+                    <!--<children>-->
+                        <!--<plumrocket translate="title" module="faq">-->
+                            <!--<title>FAQ</title>-->
+                            <!--<sort_order>1000</sort_order>-->
+                            <!--<children>-->
+                                <!--<faqbackend translate="title">-->
+                                    <!--<title>Backend Page Title</title>-->
+                                <!--</faqbackend>-->
+                            <!--</children>-->
+                        <!--</plumrocket>-->
+                    <!--</children>-->
+                <!--</admin>-->
+            <!--</resources>-->
+        <!--</acl>-->
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <faq translate="title" module="faq">
+                                        <title>FAQ</title>
+                                        <sort_order>103</sort_order>
+                                    </faq>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+    </config>
