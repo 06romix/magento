@@ -1,0 +1,17 @@
+.psfaqList {
+	margin-left: 10px;
+	font-size: 18px;
+}
+
+.psfaqPost {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.psfaqPost .psfaqTitle {
+	font-weight: bold;
+	font-size: 18px;
+}
+
+.psfaqPost .psfaqContent {
+}

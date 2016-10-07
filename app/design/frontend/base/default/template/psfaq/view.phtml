@@ -1,0 +1,11 @@
+<?php
+/**
+ * @var $this Mage_Core_Block_Template
+ */
+$post = Mage::getSingleton('psfaq/post')->getData('post');
+?>
+
+<div class="psfaqPost">
+  <div class="psfaqTitle"><?=$post['title'];?></div>
+  <div class="psfaqContent"><?=$post['content'];?></div>
+</div>

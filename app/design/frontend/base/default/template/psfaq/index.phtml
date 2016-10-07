@@ -1,0 +1,12 @@
+<?php
+/**
+ * @var $this Mage_Core_Block_Template
+ */
+$posts = Mage::getSingleton('psfaq/post')->getData('collection');
+?>
+
+<?php foreach ($posts AS $post): ?>
+<ul class="psfaqList">
+  <li><a href="<?=Mage::getUrl('psfaq/index/view') . $post['post_id'] . '/';?>"><?=$post['title'];?></a></li>
+</ul>
+<?php endforeach; ?>
