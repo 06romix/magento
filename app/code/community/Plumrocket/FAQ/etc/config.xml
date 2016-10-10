@@ -24,15 +24,13 @@
         </layout>
     </frontend>
     <adminhtml>
-        <adminhtml>
-            <layout>
-                <updates>
-                    <psfaq>
-                        <file>faq.xml</file>
-                    </psfaq>
-                </updates>
-            </layout>
-        </adminhtml>
+        <layout>
+            <updates>
+                <psfaq>
+                    <file>psfaq.xml</file>
+                </psfaq>
+            </updates>
+        </layout>
     </adminhtml>
     <global>
         <models>

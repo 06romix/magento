@@ -1,6 +1,13 @@
 <?xml version="1.0"?>
 <layout version="0.1.0">
-  <psfaq_adminhtml_faqbackend_index>
-
-  </psfaq_adminhtml_faqbackend_index>
+  <faq_adminhtml_faqbackend_index>
+    <reference name="content">
+      <block type="core/template" name="psfaq_index" template="psfaq/faqbackend.phtml"/>
+    </reference>
+  </faq_adminhtml_faqbackend_index>
+  <faq_adminhtml_faqbackend_new>
+    <reference name="content">
+      <block type="core/template" name="psfaq_new" template="psfaq/post/new.phtml"/>
+    </reference>
+  </faq_adminhtml_faqbackend_new>
 </layout>
