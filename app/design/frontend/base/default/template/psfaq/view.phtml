@@ -7,5 +7,5 @@ $post = $this->getPost();
 
 <div class="psfaqPost">
   <div class="psfaqTitle"><?php echo $this->escapeHtml($post['title']); ?></div>
-  <div class="psfaqContent"><?php echo $this->escapeHtml($post['content']); ?></div>
+  <div class="psfaqContent"><?php echo $post['content']; ?></div>
 </div>
