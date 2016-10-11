@@ -2,12 +2,17 @@
 <layout version="0.1.0">
   <faq_adminhtml_faqbackend_index>
     <reference name="content">
-      <block type="core/template" name="psfaq_index" template="psfaq/faqbackend.phtml"/>
+      <block type="psfaq/adminhtml_post" name="psfaq.admin.index"/>
     </reference>
   </faq_adminhtml_faqbackend_index>
   <faq_adminhtml_faqbackend_new>
     <reference name="content">
-      <block type="core/template" name="psfaq_new" template="psfaq/post/new.phtml"/>
+      <block type="psfaq/adminhtml_post_edit"/>
     </reference>
   </faq_adminhtml_faqbackend_new>
+  <faq_adminhtml_faqbackend_edit>
+    <reference name="content">
+      <block type="psfaq/adminhtml_post_edit"/>
+    </reference>
+  </faq_adminhtml_faqbackend_edit>
 </layout>

@@ -1,12 +1,16 @@
 <?php
 /**
- * @var $this Mage_Core_Block_Template
+ * @var $this Plumrocket_FAQ_Block_Post_Index
  */
-$posts = Mage::getSingleton('psfaq/post')->getData('collection');
+$posts = $this->getPostCollection();
 ?>
 
-<?php foreach ($posts AS $post): ?>
+<?php foreach ($posts as $post): ?>
 <ul class="psfaqList">
-  <li><a href="<?=Mage::getUrl('psfaq/index/view') . $post['post_id'] . '/';?>"><?=$post['title'];?></a></li>
+  <li>
+    <a href="<?php echo Mage::getUrl('psfaq/index/view/') . 'post/' . $post['post_id'] . '/';?>">
+      <?php echo $this->escapeHtml($post['title']); ?>
+    </a>
+  </li>
 </ul>
 <?php endforeach; ?>

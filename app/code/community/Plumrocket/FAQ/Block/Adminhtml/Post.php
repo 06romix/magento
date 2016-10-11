@@ -6,6 +6,12 @@
 
 class Plumrocket_FAQ_Block_Adminhtml_Post extends Mage_Adminhtml_Block_Widget_Grid_Container
 {
+
+  /**
+   * Plumrocket_FAQ_Block_Adminhtml_Post constructor.
+   *
+   * Create grid (_blockGroup/_controller . _grid)
+   */
   public function __construct()
   {
     $this->_blockGroup = 'psfaq';

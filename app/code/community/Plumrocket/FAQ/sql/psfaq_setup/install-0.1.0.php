@@ -23,6 +23,10 @@ $table = $installer->getConnection()
   ->addColumn('title', Varien_Db_Ddl_Table::TYPE_CHAR, 90, array(
     'nullable'  => false,
   ), 'Title')
+  ->addColumn('status', Varien_Db_Ddl_Table::TYPE_BOOLEAN, null, array(
+    'nullable'  => false,
+    'default'   => 1,
+  ), 'Title')
   ->addColumn('content', Varien_Db_Ddl_Table::TYPE_TEXT, null, array(
     'nullable'  => false,
   ), 'Content');

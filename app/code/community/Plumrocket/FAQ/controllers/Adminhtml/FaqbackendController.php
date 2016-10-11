@@ -2,23 +2,30 @@
 class Plumrocket_FAQ_Adminhtml_FaqbackendController extends Mage_Adminhtml_Controller_Action
 {
 
+  /**
+   * Show post grid
+   */
   public function indexAction()
   {
+    $this->_initAction();
     $this->_title($this->__("Plumrocket Manage FAQ"));
-    $this->loadLayout();
-    $this->_addContent($this->getLayout()->createBlock('psfaq/adminhtml_post'));
 
     $this->renderLayout();
   }
 
+  /**
+   * Redirect to editAction() without param ID
+   */
   public function newAction()
   {
     $this->_forward('edit');
   }
 
+  /**
+   * Action for create/edit post (check by ID)
+   */
   public function editAction()
   {
-    $this->_initAction();
     // Get id if available
     $id  = $this->getRequest()->getParam('id');
     $model = Mage::getModel('psfaq/post');
@@ -43,14 +50,20 @@ class Plumrocket_FAQ_Adminhtml_FaqbackendController extends Mage_Adminhtml_Contr
       $model->setData($data);
     }
 
-    Mage::register('psfaq', $model);
+    Mage::register('psfaq_post', $model);
 
-    $this->_initAction()
-      ->_addBreadcrumb($id ? $this->__('Edit Post') : $this->__('New Post'), $id ? $this->__('Edit Post') : $this->__('New Post'))
-      ->_addContent($this->getLayout()->createBlock('psfaq/adminhtml_post_edit')->setData('action', $this->getUrl('*/*/save')))
-      ->renderLayout();
+    $this->_initAction();
+    $this->_addBreadcrumb(
+      $id ? $this->__('Edit Post') : $this->__('New Post'),
+      $id ? $this->__('Edit Post') : $this->__('New Post')
+    );
+
+    $this->renderLayout();
   }
 
+  /**
+   * Try save post to database
+   */
   public function saveAction()
   {
     if ($postData = $this->getRequest()->getPost()) {
@@ -60,7 +73,7 @@ class Plumrocket_FAQ_Adminhtml_FaqbackendController extends Mage_Adminhtml_Contr
       try {
         $model->save();
 
-        Mage::getSingleton('adminhtml/session')->addSuccess($this->__('The post has been saved.'));
+        Mage::getSingleton('adminhtml/session')->addSuccess($this->__('The Post has been saved.'));
         $this->_redirect('*/*/');
 
         return;
@@ -77,23 +90,38 @@ class Plumrocket_FAQ_Adminhtml_FaqbackendController extends Mage_Adminhtml_Contr
     }
   }
 
-  public function messageAction()
+  /**
+   * Delete post by ID
+   */
+  public function deleteAction()
   {
-    $data = Mage::getModel('psfaq/post')->load($this->getRequest()->getParam('id'));
-    echo $data->getContent();
+    $post_id = (int)$this->getRequest()->getParam('id');
+    if ($post_id) {
+      $model = Mage::getModel('psfaq/post');
+      if (!$model->load($post_id)->isEmpty()) {
+        $model->delete();
+        Mage::getSingleton('adminhtml/session')->addSuccess($this->__('The Post ID[' . $post_id .'] deleted.'));
+        $this->_redirect('*/*/');
+        return;
+      }
+    }
+
+    Mage::getSingleton('adminhtml/session')->addError($this->__('The Post ID[' . $post_id .'] don\'t isset.'));
+    $this->_redirect('*/*/');
+    return;
   }
 
   /**
    * Initialize action
    *
-   * Here, we set the breadcrumbs and the active menu
+   * Set active menu
    *
    * @return Mage_Adminhtml_Controller_Action
    */
   protected function _initAction()
   {
-    $this->loadLayout()
-      ->_setActiveMenu('plumrocket/faq/manage_faq');
+    $this->loadLayout()->_setActiveMenu('plumrocket/faq/manage_faq');
+    $this->_initLayoutMessages('adminhtml/session');
 
     return $this;
   }

@@ -18,6 +18,9 @@ class Plumrocket_FAQ_Block_Adminhtml_Post_Grid extends Mage_Adminhtml_Block_Widg
 
   protected function _prepareCollection()
   {
+    /**
+     * @var $collection Plumrocket_FAQ_Model_Mysql4_Post_Collection
+     */
     $collection = Mage::getResourceModel('psfaq/post_collection');
     $this->setCollection($collection);
 
@@ -26,6 +29,9 @@ class Plumrocket_FAQ_Block_Adminhtml_Post_Grid extends Mage_Adminhtml_Block_Widg
 
   protected function _prepareColumns()
   {
+    /**
+     * @var $helper Plumrocket_FAQ_Helper_Data
+     */
     $helper = Mage::helper('psfaq');
 
     $this->addColumn('post_id', [
@@ -38,16 +44,21 @@ class Plumrocket_FAQ_Block_Adminhtml_Post_Grid extends Mage_Adminhtml_Block_Widg
       'header' => $helper->__('Title'),
       'type'   => 'string',
       'index'  => 'title',
-      'width'  => 500,
+      'width'  => '25%',
     ]);
-    $wysiwygConfig = Mage::getSingleton('cms/wysiwyg_config');
+
+    $this->addColumn('status', [
+      'header' => $helper->__('Status'),
+      'type'   => 'select',
+      'index'  => 'status',
+      'options'=> $helper->getPostStatusOptions(),
+      'width'  => '80px',
+    ]);
+
     $this->addColumn('content', [
       'header' => $helper->__('Content'),
       'type'   => 'text',
       'index'  => 'content',
-      'wysiwyg'   => true,
-      'required'  => false,
-      'config'    => $wysiwygConfig
     ]);
 
     return parent::_prepareColumns();

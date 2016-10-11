@@ -23,7 +23,13 @@ class Plumrocket_FAQ_Block_Adminhtml_Post_Edit_Form extends Mage_Adminhtml_Block
    */
   protected function _prepareForm()
   {
-    $model = Mage::registry('psfaq');
+    $model = Mage::registry('psfaq_post');
+    Mage::unregister('psfaq_post');
+
+    /**
+     * @var $helper Plumrocket_FAQ_Helper_Data
+     */
+    $helper = Mage::helper('psfaq');
 
     $form = new Varien_Data_Form([
       'id'        => 'edit_form',
@@ -37,23 +43,31 @@ class Plumrocket_FAQ_Block_Adminhtml_Post_Edit_Form extends Mage_Adminhtml_Block
     ]);
 
     if ($model->getId()) {
-      $fieldset->addField('id', 'hidden', [
-        'name' => 'id',
+      $fieldset->addField('post_id', 'hidden', [
+        'name' => 'post_id',
       ]);
     }
 
     $fieldset->addField('title', 'text', [
       'name'      => 'title',
-      'label'     => Mage::helper('psfaq')->__('Title'),
-      'title'     => Mage::helper('psfaq')->__('Title'),
+      'label'     => $helper->__('Title'),
+      'title'     => $helper->__('Title'),
       'required'  => true,
+    ]);
+
+    $fieldset->addField('status', 'select', [
+      'name'      => 'status',
+      'label'     => $helper->__('Status'),
+      'title'     => $helper->__('Status'),
+      'options'   => $helper->getPostStatusOptions(),
     ]);
 
     $fieldset->addField('content', 'textarea', [
       'name'      => 'content',
-      'label'     => Mage::helper('psfaq')->__('Content'),
-      'title'     => Mage::helper('psfaq')->__('Content'),
+      'label'     => $helper->__('Content'),
+      'title'     => $helper->__('Content'),
       'required'  => true,
+      'wysiwyg'   => true,
     ]);
 
     $form->setValues($model->getData());

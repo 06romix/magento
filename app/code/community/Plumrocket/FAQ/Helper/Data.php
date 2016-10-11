@@ -22,4 +22,12 @@ class Plumrocket_FAQ_Helper_Data extends Mage_Admin_Helper_Data
   {
     return (bool)Mage::getStoreConfig('psfaq/general/enable');
   }
+
+  public function getPostStatusOptions()
+  {
+    return [
+      0 => $this->__('Disabled'),
+      1 => $this->__('Enabled'),
+    ];
+  }
 }

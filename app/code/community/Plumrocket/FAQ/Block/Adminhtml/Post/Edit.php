@@ -16,8 +16,8 @@ class Plumrocket_FAQ_Block_Adminhtml_Post_Edit extends Mage_Adminhtml_Block_Widg
 
     parent::__construct();
 
-    $this->_updateButton('save', 'label', $this->__('Save Post'));
-    $this->_updateButton('delete', 'label', $this->__('Delete post'));
+    $this->_updateButton('save', 'label', $this->__('Save'));
+    $this->_updateButton('delete', 'label', $this->__('Delete'));
   }
 
   /**
