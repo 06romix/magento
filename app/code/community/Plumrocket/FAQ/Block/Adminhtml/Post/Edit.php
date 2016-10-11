@@ -27,7 +27,7 @@ class Plumrocket_FAQ_Block_Adminhtml_Post_Edit extends Mage_Adminhtml_Block_Widg
    */
   public function getHeaderText()
   {
-    if (Mage::registry('psfaq')->getId()) {
+    if (Mage::registry('psfaq_post')->getId()) {
       return $this->__('Edit Post');
     }
     else {
