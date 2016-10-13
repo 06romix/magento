@@ -15,7 +15,6 @@
  * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
  */
 
-
 class Plumrocket_FAQ_Model_Post extends Mage_Core_Model_Abstract
 {
   public function _construct()

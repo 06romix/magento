@@ -1,4 +1,20 @@
 <?php
+/**
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket_SocialLogin
+ * @copyright   Copyright (c) 2014 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ */
+
 class Plumrocket_FAQ_IndexController extends Mage_Core_Controller_Front_Action
 {
 
@@ -14,28 +30,36 @@ class Plumrocket_FAQ_IndexController extends Mage_Core_Controller_Front_Action
   /**
    * Show post by id
    *
-   * If post empty or don't exists - show 404 page from CMS_INDEX_NoROUTE
-   *
-   * @return bool
+   * If post empty or disabled - show 404 page from CMS_INDEX_NOROUTE
    */
   public function viewAction()
   {
     $model = Mage::getModel('psfaq/post');
     $post_id = (int)$this->getRequest()->getParam('post');
-    if ($model->load($post_id)->isEmpty()) {
+
+    if ($model->load($post_id)->isEmpty() || !$model->getData('status')) {
       $this->_forward('cms_index_noroute');
-      return false;
+      return;
     }
 
     Mage::register('psfaq_post', $model);
 
     $this->_initAction();
     $this->renderLayout();
-    return true;
   }
 
   protected function _initAction()
   {
+    /**
+     * @var $helper Plumrocket_FAQ_Helper_Data
+     */
+    $helper = Mage::helper('psfaq');
+    // 404 if module disabled
+    if (!$helper->moduleEnabled()) {
+      $this->_forward('cms_index_noroute');
+      return;
+    }
+
     $this->loadLayout();
     /**
      * @var $head Mage_Page_Block_Html_Head
@@ -50,30 +74,30 @@ class Plumrocket_FAQ_IndexController extends Mage_Core_Controller_Front_Action
 
     $breadcrumbs->addCrumb(
       'home',
-      [
+      array(
         'label' => $this->__('Home Page'),
         'title' => $this->__('Home Page'),
         'link'  => Mage::getBaseUrl(),
-      ]
+      )
     );
 
     $breadcrumbs->addCrumb(
       'titleName',                            // class
-      [
+      array(
         'label' => $this->__('FAQ'),          // >text<
         'title' => $this->__('FAQ'),          // <a title="">
         'link'  => Mage::getUrl('psfaq/'),    // <a href="">
-      ]
+      )
     );
 
     $post_id = (int)$this->getRequest()->getParam('post');
     if ($post_id) {
       $breadcrumbs->addCrumb(
         'view',
-        [
+        array(
           'label' => $this->__('view'),
           'title' => $this->__('view'),
-        ]
+        )
       );
     }
   }

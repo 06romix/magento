@@ -1,8 +1,18 @@
 <?php
-
 /**
- * @author: Rudawskyj
- * Date: 10.10.16 15:23
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket_SocialLogin
+ * @copyright   Copyright (c) 2014 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
  */
 
 class Plumrocket_FAQ_Block_Adminhtml_Post_Grid extends Mage_Adminhtml_Block_Widget_Grid
@@ -34,38 +44,38 @@ class Plumrocket_FAQ_Block_Adminhtml_Post_Grid extends Mage_Adminhtml_Block_Widg
      */
     $helper = Mage::helper('psfaq');
 
-    $this->addColumn('post_id', [
+    $this->addColumn('post_id', array(
       'header' => $helper->__('ID #'),
       'index'  => 'post_id',
       'width'  => 50,
-    ]);
+    ));
 
-    $this->addColumn('title', [
+    $this->addColumn('title', array(
       'header' => $helper->__('Title'),
       'type'   => 'string',
       'index'  => 'title',
       'width'  => '25%',
-    ]);
+    ));
 
-    $this->addColumn('status', [
+    $this->addColumn('status', array(
       'header' => $helper->__('Status'),
       'type'   => 'select',
       'index'  => 'status',
       'options'=> $helper->getPostStatusOptions(),
       'width'  => '80px',
-    ]);
+    ));
 
-    $this->addColumn('content', [
+    $this->addColumn('content', array(
       'header' => $helper->__('Content'),
       'type'   => 'text',
       'index'  => 'content',
-    ]);
+    ));
 
     return parent::_prepareColumns();
   }
 
   public function getRowUrl($row)
   {
-    return $this->getUrl('*/*/edit',['id' => $row->getId()]);
+    return $this->getUrl('*/*/edit',array('id' => $row->getId()));
   }
 }

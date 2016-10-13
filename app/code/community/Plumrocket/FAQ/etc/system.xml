@@ -14,7 +14,7 @@
         <psfaq>
             <label>FAQ</label>
             <tab>plumrocket</tab>
-            <sort_order>505</sort_order>
+            <sort_order>102</sort_order>
             <frontend_type>text</frontend_type>
     		<show_in_default>1</show_in_default>
     		<show_in_website>1</show_in_website>

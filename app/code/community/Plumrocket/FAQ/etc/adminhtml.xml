@@ -5,7 +5,7 @@
 			<title>Plumrocket</title>
 			<sort_order>80</sort_order>
 			<children>
-				<faq>
+				<psfaq>
 					<title>FAQ</title>
 					<sort_order>0</sort_order>
 					<action>adminhtml/system_config/edit/section/psfaq</action>
@@ -16,24 +16,22 @@
 							<action>admin_faq/adminhtml_faqbackend</action>
 						</manage_faq>
 					</children>
-				</faq>
+				</psfaq>
 			</children>
 		</plumrocket>
 	</menu>
 	<acl>
 		<resources>
-			<all>
-				<title>Allow everything</title>
-			</all>
 			<admin>
 				<children>
 					<system>
 						<children>
 							<config>
 								<children>
-									<psfaq_config translate="title" module="psfaq">
+									<psfaq translate="title" module="psfaq">
 										<title>FAQ</title>
-									</psfaq_config>
+										<sort_order>102</sort_order>
+									</psfaq>
 								</children>
 							</config>
 						</children>
@@ -42,4 +40,5 @@
 			</admin>
 		</resources>
 	</acl>
+
 </config>

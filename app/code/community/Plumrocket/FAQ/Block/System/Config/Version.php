@@ -15,16 +15,15 @@
  * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
  */
 
-
 class Plumrocket_FAQ_Block_System_Config_Version extends Mage_Adminhtml_Block_System_Config_Form_Field
 {
   public function render(Varien_Data_Form_Element_Abstract $element)
   {
     $m = Mage::getConfig()->getNode('modules/'.$this->getModuleName());
-    $html = '<div style="padding:10px;background-color:#fff;border:1px solid #ddd;margin-bottom:7px;">
-            ' . $m->name . ' v' . $m->version . ' was developed by <a href="https://store.plumrocket.com" target="_blank">Plumrocket Inc</a>.
-            For manual & video tutorials please refer to <a href="' . $m->wiki . '" target="_blank">our online documentation<a/>.
-         </div>';
+    $html = '<div style="padding:10px;background-color:#fff;border:1px solid #ddd;margin-bottom:7px;">'
+          . $m->name . ' v' . $m->version . ' was developed by <a href="https://store.plumrocket.com" target="_blank">Plumrocket Inc</a>.'
+//          . 'For manual & video tutorials please refer to <a href="' . $m->wiki . '" target="_blank">our online documentation<a/>.'
+          . '</div>';
     return $html;
   }
 }
