@@ -17,14 +17,15 @@
 
 /**
  * @var $this Plumrocket_FAQ_Block_Post_Index
+ * @var $post Plumrocket_FAQ_Model_Post
  */
-$posts = $this->getPostCollection();
+$collection = $this->getPostCollection();
 ?>
 
-<?php foreach ($posts as $post): ?>
+<?php foreach ($collection as $post): ?>
 <ul class="psfaqList">
   <li>
-    <a href="<?php echo Mage::getUrl('psfaq/index/view/') . 'post/' . $post['post_id'] . '/';?>">
+    <a href="<?php echo $post->getFaqUrl();?>">
       <?php echo $this->escapeHtml($post['title']); ?>
     </a>
   </li>

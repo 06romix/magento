@@ -25,8 +25,21 @@ class Plumrocket_FAQ_Helper_Data extends Mage_Admin_Helper_Data
   public function getPostStatusOptions()
   {
     return [
-      0 => $this->__('Disabled'),
-      1 => $this->__('Enabled'),
+      'Disabled' => $this->__('Disabled'),
+      'Enabled'  => $this->__('Enabled'),
     ];
+  }
+
+  const XML_NODE_BLOCK_TEMPLATE_FILTER    = 'global/cms/block/tempate_filter';
+
+  /**
+   * Retrieve Template processor for Block Content
+   *
+   * @return Varien_Filter_Template
+   */
+  public function getBlockTemplateProcessor()
+  {
+    $model = (string)Mage::getConfig()->getNode(self::XML_NODE_BLOCK_TEMPLATE_FILTER);
+    return Mage::getModel($model);
   }
 }

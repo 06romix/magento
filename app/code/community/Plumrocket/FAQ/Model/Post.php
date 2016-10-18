@@ -21,4 +21,29 @@ class Plumrocket_FAQ_Model_Post extends Mage_Core_Model_Abstract
   {
     $this->_init('psfaq/post');
   }
+
+  /**
+   * @param array $postIds
+   * @param string $status
+   */
+  public function updateStatus($postIds, $status)
+  {
+    foreach ($postIds as $postId) {
+      $this->load($postId);
+      if ($this->getId()) {
+        $this->setData('status', $status);
+        $this->save();
+      }
+    }
+  }
+
+  /**
+   * return url for list of faq
+   *
+   * @return string
+   */
+  public function getFaqUrl()
+  {
+    return Mage::getUrl('psfaq/index/view/', array('post' => $this->getId()));
+  }
 }

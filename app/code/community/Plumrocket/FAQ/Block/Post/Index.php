@@ -18,15 +18,18 @@
 class Plumrocket_FAQ_Block_Post_Index extends Mage_Core_Block_Template
 {
 
+  /**
+   * @return Plumrocket_FAQ_Model_Mysql4_Post_Collection
+   */
   public function getPostCollection()
   {
     /**
      * @var $collection Plumrocket_FAQ_Model_Mysql4_Post_Collection
      */
     $collection = Mage::getModel('psfaq/post')->getCollection();
-    $collection->addFilter('status', 1);
+    $collection->addFilter('status', 'Enabled');
     $collection->setOrder('post_id', 'DESC');
 
-    return $collection->getData();
+    return $collection;
   }
 }

@@ -44,7 +44,15 @@ class Plumrocket_FAQ_Adminhtml_FaqbackendController extends Mage_Adminhtml_Contr
   {
     // Get id if available
     $id  = $this->getRequest()->getParam('id');
+    /**
+     * @var $model Plumrocket_FAQ_Model_Post
+     */
     $model = Mage::getModel('psfaq/post');
+
+    /**
+     * @var $session Mage_Adminhtml_Model_Session
+     */
+    $session = Mage::getSingleton('adminhtml/session');
 
     if ($id) {
       // Load record
@@ -52,16 +60,16 @@ class Plumrocket_FAQ_Adminhtml_FaqbackendController extends Mage_Adminhtml_Contr
 
       // Check if record is loaded
       if (!$model->getId()) {
-        Mage::getSingleton('adminhtml/session')->addError($this->__('This Post no longer exists.'));
+        $session->addError($this->__('This Post no longer exists.'));
         $this->_redirect('*/*/');
 
         return;
       }
     }
 
-    $this->_title($model->getId() ? $model->getTitle() : $this->__('New Post'));
+    $this->_title($model->getId() ? $model->getData('title') : $this->__('New Post'));
 
-    $data = Mage::getSingleton('adminhtml/session')->getPostData(true);
+    $data = $session->getData('post');
     if (!empty($data)) {
       $model->setData($data);
     }
@@ -82,6 +90,11 @@ class Plumrocket_FAQ_Adminhtml_FaqbackendController extends Mage_Adminhtml_Contr
    */
   public function saveAction()
   {
+    /**
+     * @var $session Mage_Adminhtml_Model_Session
+     */
+    $session = Mage::getSingleton('adminhtml/session');
+
     if ($postData = $this->getRequest()->getPost()) {
       $model = Mage::getSingleton('psfaq/post');
       $model->setData($postData);
@@ -89,19 +102,16 @@ class Plumrocket_FAQ_Adminhtml_FaqbackendController extends Mage_Adminhtml_Contr
       try {
         $model->save();
 
-        Mage::getSingleton('adminhtml/session')->addSuccess($this->__('The Post has been saved.'));
+        $session->addSuccess($this->__('The Post has been saved.'));
         $this->_redirect('*/*/');
-
         return;
-      }
-      catch (Mage_Core_Exception $e) {
-        Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
-      }
-      catch (Exception $e) {
-        Mage::getSingleton('adminhtml/session')->addError($this->__('An error occurred while saving this post.'));
+      } catch (Mage_Core_Exception $e) {
+        $session->addError($e->getMessage());
+      } catch (Exception $e) {
+        $session->addError($this->__('An error occurred while saving this post.'));
       }
 
-      Mage::getSingleton('adminhtml/session')->setPostData($postData);
+      $session->setData('post', $postData);
       $this->_redirectReferer();
     }
   }
@@ -111,20 +121,78 @@ class Plumrocket_FAQ_Adminhtml_FaqbackendController extends Mage_Adminhtml_Contr
    */
   public function deleteAction()
   {
-    $post_id = (int)$this->getRequest()->getParam('id');
-    if ($post_id) {
+    /**
+     * @var $session Mage_Adminhtml_Model_Session
+     */
+    $session = Mage::getSingleton('adminhtml/session');
+
+    $postId = (int)$this->getRequest()->getParam('id');
+    if ($postId) {
       $model = Mage::getModel('psfaq/post');
-      if (!$model->load($post_id)->isEmpty()) {
+      if ($model->load($postId)->getId()) {
         $model->delete();
-        Mage::getSingleton('adminhtml/session')->addSuccess($this->__('The Post ID[' . $post_id .'] deleted.'));
-        $this->_redirect('*/*/');
-        return;
+        $session->addSuccess($this->__('The Post ID [ ' . $postId .' ] deleted.'));
+      } else {
+        $session->addError($this->__('The Post ID [ ' . $postId .' ] don\'t isset.'));
       }
     }
 
-    Mage::getSingleton('adminhtml/session')->addError($this->__('The Post ID[' . $post_id .'] don\'t isset.'));
     $this->_redirect('*/*/');
-    return;
+  }
+
+  /**
+   * Delete post(s) by IDS
+   */
+  public function massDeleteAction()
+  {
+    /**
+     * @var $session Mage_Adminhtml_Model_Session
+     */
+    $session = Mage::getSingleton('adminhtml/session');
+
+    $postIds = (array)$this->getRequest()->getParam('post');
+    foreach ($postIds as $postId) {
+      if ($postId) {
+        $model = Mage::getModel('psfaq/post');
+        if ($model->load($postId)->getId()) {
+          $model->delete();
+          $session->addSuccess($this->__('The Post ID [ ' . $postId .' ] deleted.'));
+        } else {
+          $session->addError($this->__('The Post ID [ ' . $postId .' ] don\'t isset.'));
+        }
+      }
+    }
+
+    $this->_redirect('*/*/');
+  }
+
+  /**
+   * Update post(s) status action
+   *
+   */
+  public function massStatusAction()
+  {
+    $postIds = (array)$this->getRequest()->getParam('post');
+    $status  = (string)$this->getRequest()->getParam('status');
+
+    try {
+      /**
+       * @var $post Plumrocket_FAQ_Model_Post
+       */
+      $post = Mage::getSingleton('psfaq/post');
+      $post->updateStatus($postIds, $status);
+
+      $this->_getSession()->addSuccess(
+        $this->__('Total of %d record(s) have been updated.', count($postIds))
+      );
+    } catch (Mage_Core_Exception $e) {
+      $this->_getSession()->addError($e->getMessage());
+    } catch (Exception $e) {
+      $this->_getSession()
+        ->addException($e, $this->__('An error occurred while updating the post(s) status.'));
+    }
+
+    $this->_redirect('*/*/');
   }
 
   /**

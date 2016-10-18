@@ -33,10 +33,10 @@ $table = $installer->getConnection()
   ->addColumn('title', Varien_Db_Ddl_Table::TYPE_CHAR, 90, array(
     'nullable'  => false,
   ), 'Title')
-  ->addColumn('status', Varien_Db_Ddl_Table::TYPE_BOOLEAN, null, array(
+  ->addColumn('status', Varien_Db_Ddl_Table::TYPE_CHAR, 20, array(
     'nullable'  => false,
-    'default'   => 1,
-  ), 'Title')
+    'default'   => 'Disabled',
+  ), 'Status')
   ->addColumn('content', Varien_Db_Ddl_Table::TYPE_TEXT, null, array(
     'nullable'  => false,
   ), 'Content');

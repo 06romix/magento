@@ -17,12 +17,43 @@
 
 class Plumrocket_FAQ_Block_Post_View extends Mage_Core_Block_Template
 {
+  /**
+   * Retrieve Page instance
+   *
+   * @return Mage_Cms_Model_Page
+   */
+  public function getPage()
+  {
+    if (!$this->hasData('page')) {
+      if ($this->getPageId()) {
+        $page = Mage::getModel('cms/page')->load($this->getPageId(), 'identifier');
+      } else {
+        $page = Mage::getSingleton('cms/page');
+      }
+      $this->addModelTags($page);
+      $this->setData('page', $page);
+    }
+    return $this->getData('page');
+  }
 
   public function getPost()
   {
-    $data = Mage::registry('psfaq_post')->getData();
-    Mage::unregister('psfaq_post');
+    return Mage::registry('psfaq_post');
+  }
 
-    return $data;
+  /**
+   * Prepare Content HTML
+   *
+   * @return string
+   */
+  protected function _toHtml()
+  {
+    $block = Mage::registry('psfaq_post');
+
+    /* @var $helper Plumrocket_FAQ_Helper_Data */
+    $helper = Mage::helper('psfaq');
+    $processor = $helper->getBlockTemplateProcessor();
+    $block->setContent($processor->filter($block->getContent()));
+    return parent::_toHtml();
   }
 }
