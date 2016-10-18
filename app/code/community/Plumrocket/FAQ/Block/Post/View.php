@@ -17,25 +17,6 @@
 
 class Plumrocket_FAQ_Block_Post_View extends Mage_Core_Block_Template
 {
-  /**
-   * Retrieve Page instance
-   *
-   * @return Mage_Cms_Model_Page
-   */
-  public function getPage()
-  {
-    if (!$this->hasData('page')) {
-      if ($this->getPageId()) {
-        $page = Mage::getModel('cms/page')->load($this->getPageId(), 'identifier');
-      } else {
-        $page = Mage::getSingleton('cms/page');
-      }
-      $this->addModelTags($page);
-      $this->setData('page', $page);
-    }
-    return $this->getData('page');
-  }
-
   public function getPost()
   {
     return Mage::registry('psfaq_post');
