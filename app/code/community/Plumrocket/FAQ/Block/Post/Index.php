@@ -27,7 +27,7 @@ class Plumrocket_FAQ_Block_Post_Index extends Mage_Core_Block_Template
      * @var $collection Plumrocket_FAQ_Model_Mysql4_Post_Collection
      */
     $collection = Mage::getModel('psfaq/post')->getCollection();
-    $collection->addFilter('status', 'Enabled');
+    $collection->addFilter('status', true);
     $collection->setOrder('post_id', 'DESC');
 
     return $collection;

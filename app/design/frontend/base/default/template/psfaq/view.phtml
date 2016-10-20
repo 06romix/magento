@@ -23,6 +23,6 @@ $post = $this->getPost();
 ?>
 
 <div class="psfaqPost">
-  <div class="psfaqTitle"><?php echo $this->escapeHtml($post['title']); ?></div>
-  <div class="psfaqContent"><?php echo $post['content']; ?></div>
+  <div class="psfaqTitle"><?php echo $this->escapeHtml($post->getTitle()); ?></div>
+  <div class="psfaqContent"><?php echo $this->getContent(); ?></div>
 </div>

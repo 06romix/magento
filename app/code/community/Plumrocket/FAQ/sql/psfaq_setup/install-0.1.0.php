@@ -21,7 +21,6 @@ $installer = $this;
  */
 $installer->startSetup();
 
-//$installer->getConnection()->dropTable($installer->getTable('psfaq/post'));
 $table = $installer->getConnection()
   ->newTable($installer->getTable('psfaq/post'))
   ->addColumn('post_id', Varien_Db_Ddl_Table::TYPE_INTEGER, null, array(
@@ -33,9 +32,9 @@ $table = $installer->getConnection()
   ->addColumn('title', Varien_Db_Ddl_Table::TYPE_CHAR, 90, array(
     'nullable'  => false,
   ), 'Title')
-  ->addColumn('status', Varien_Db_Ddl_Table::TYPE_CHAR, 20, array(
+  ->addColumn('status', Varien_Db_Ddl_Table::TYPE_BOOLEAN, null, array(
     'nullable'  => false,
-    'default'   => 'Disabled',
+    'default'   => 0,
   ), 'Status')
   ->addColumn('content', Varien_Db_Ddl_Table::TYPE_TEXT, null, array(
     'nullable'  => false,

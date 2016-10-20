@@ -26,7 +26,7 @@ $collection = $this->getPostCollection();
 <ul class="psfaqList">
   <li>
     <a href="<?php echo $post->getFaqUrl();?>">
-      <?php echo $this->escapeHtml($post['title']); ?>
+      <?php echo $this->escapeHtml($post->getTitle()); ?>
     </a>
   </li>
 </ul>

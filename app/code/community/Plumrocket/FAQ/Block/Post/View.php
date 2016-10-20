@@ -27,14 +27,13 @@ class Plumrocket_FAQ_Block_Post_View extends Mage_Core_Block_Template
    *
    * @return string
    */
-  protected function _toHtml()
+  public function getContent()
   {
     $block = Mage::registry('psfaq_post');
 
     /* @var $helper Plumrocket_FAQ_Helper_Data */
     $helper = Mage::helper('psfaq');
     $processor = $helper->getBlockTemplateProcessor();
-    $block->setContent($processor->filter($block->getContent()));
-    return parent::_toHtml();
+    return $processor->filter($block->getContent());
   }
 }

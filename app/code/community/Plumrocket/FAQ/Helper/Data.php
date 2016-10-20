@@ -24,10 +24,10 @@ class Plumrocket_FAQ_Helper_Data extends Mage_Admin_Helper_Data
 
   public function getPostStatusOptions()
   {
-    return [
-      'Disabled' => $this->__('Disabled'),
-      'Enabled'  => $this->__('Enabled'),
-    ];
+    return array(
+      0 => $this->__('Disabled'),
+      1 => $this->__('Enabled'),
+    );
   }
 
   const XML_NODE_BLOCK_TEMPLATE_FILTER    = 'global/cms/block/tempate_filter';

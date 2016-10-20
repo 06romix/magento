@@ -15,6 +15,17 @@
  * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
  */
 
+/**
+ * Class Plumrocket_FAQ_Model_Post
+ * @method void   setTitle(string $title)
+ * @method string getTitle()
+ *
+ * @method void   setStatus(int $status)
+ * @method int    getStatus()
+ *
+ * @method void   setContent(string $content)
+ * @method string getContent()
+ */
 class Plumrocket_FAQ_Model_Post extends Mage_Core_Model_Abstract
 {
   public function _construct()
@@ -31,7 +42,7 @@ class Plumrocket_FAQ_Model_Post extends Mage_Core_Model_Abstract
     foreach ($postIds as $postId) {
       $this->load($postId);
       if ($this->getId()) {
-        $this->setData('status', $status);
+        $this->setStatus($status);
         $this->save();
       }
     }
@@ -44,6 +55,6 @@ class Plumrocket_FAQ_Model_Post extends Mage_Core_Model_Abstract
    */
   public function getFaqUrl()
   {
-    return Mage::getUrl('psfaq/index/view/', array('post' => $this->getId()));
+    return Mage::getUrl('psfaq/index/view', array('post' => $this->getId()));
   }
 }

@@ -51,10 +51,11 @@ class Plumrocket_FAQ_Block_Adminhtml_Post_Grid extends Mage_Adminhtml_Block_Widg
     ));
 
     $this->addColumn('status', array(
-      'header' => $helper->__('Status'),
-      'type'   => 'text',
-      'index'  => 'status',
-      'width'  => '90px',
+      'header'  => $helper->__('Status'),
+      'type'    => 'options',
+      'index'   => 'status',
+      'options' => $helper->getPostStatusOptions(),
+      'width'   => '90px',
     ));
 
     $this->addColumn('title', array(

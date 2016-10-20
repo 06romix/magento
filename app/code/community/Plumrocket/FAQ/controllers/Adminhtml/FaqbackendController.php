@@ -131,9 +131,9 @@ class Plumrocket_FAQ_Adminhtml_FaqbackendController extends Mage_Adminhtml_Contr
       $model = Mage::getModel('psfaq/post');
       if ($model->load($postId)->getId()) {
         $model->delete();
-        $session->addSuccess($this->__('The Post ID [ ' . $postId . ' ] deleted.'));
+        $session->addSuccess($this->__('The Post ID [ %s ] deleted.', $postId));
       } else {
-        $session->addError($this->__('The Post ID [ ' . $postId . ' ] don\'t isset.'));
+        $session->addError($this->__('The Post ID [ %s ] don\'t isset.', $postId));
       }
     }
 
@@ -156,9 +156,9 @@ class Plumrocket_FAQ_Adminhtml_FaqbackendController extends Mage_Adminhtml_Contr
         $model = Mage::getModel('psfaq/post');
         if ($model->load($postId)->getId()) {
           $model->delete();
-          $session->addSuccess($this->__('The Post ID [ ' . $postId . ' ] deleted.'));
+          $session->addSuccess($this->__('The Post ID [ %s ] deleted.', $postId));
         } else {
-          $session->addError($this->__('The Post ID [ ' . $postId . ' ] don\'t isset.'));
+          $session->addError($this->__('The Post ID [ %s ] don\'t isset.', $postId));
         }
       }
     }
